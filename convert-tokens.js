@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const fs = require('fs');
 const path = require('path');
 
@@ -22,7 +23,7 @@ function isSystemToken(pathArray) {
     return rootGroup === 'color roles' || rootGroup === 'typography';
 }
 
-function resolveValue(value, allTokens) {
+function resolveValue(value, _allTokens) {
     if (typeof value === 'string' && value.startsWith('{') && value.endsWith('}')) {
         const refPath = value.slice(1, -1).split('.');
         const refName = getTokenPathName(refPath);

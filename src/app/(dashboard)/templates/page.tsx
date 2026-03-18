@@ -33,7 +33,7 @@ export default function TemplatesPage() {
             
             <h3 className="title-medium text-xl mb-3">{template.name}</h3>
             <p className="text-on-surface-variant body-large bg-surface-variant/20 p-4 rounded-2xl italic flex-grow mb-6 line-clamp-3 font-serif">
-              "{template.body}"
+              &quot;{template.body}&quot;
             </p>
             
             <div className="flex items-center justify-between pt-6 border-t border-outline-variant">

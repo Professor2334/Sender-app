@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server"; 
 import prisma from "@/lib/prisma";
-import { MessageStatus, EventType, LeadStatus } from "@prisma/client";
+import { $Enums } from "@prisma/client";
 
 export async function POST(req: NextRequest) {
   try {
@@ -18,10 +18,10 @@ export async function POST(req: NextRequest) {
       const messageId = statusUpdate.id;
       const status = statusUpdate.status; // delivered, read, failed...
       
-      const mappedStatus: MessageStatus = 
-        status === "delivered" ? MessageStatus.DELIVERED :
-        status === "read" ? MessageStatus.READ :
-        status === "failed" ? MessageStatus.FAILED : MessageStatus.SENT;
+      const mappedStatus: $Enums.MessageStatus = 
+        status === "delivered" ? $Enums.MessageStatus.DELIVERED :
+        status === "read" ? $Enums.MessageStatus.READ :
+        status === "failed" ? $Enums.MessageStatus.FAILED : $Enums.MessageStatus.SENT;
 
       const message = await prisma.message.update({
         where: { whatsappMessageId: messageId },
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
       await prisma.messageEvent.create({
         data: {
           messageId: message.id,
-          eventType: mappedStatus === MessageStatus.READ ? EventType.MESSAGE_READ : EventType.MESSAGE_DELIVERED,
+          eventType: mappedStatus === $Enums.MessageStatus.READ ? $Enums.EventType.MESSAGE_READ : $Enums.EventType.MESSAGE_DELIVERED,
           occurredAt: new Date(),
           eventPayloadJson: statusUpdate
         }
@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
           data: {
             conversationId: "placeholder", // In reality, find or create conversation
             leadId: lead.id,
-            direction: "INBOUND",
+            direction: $Enums.MessageDirection.INBOUND,
             body: text || "",
             whatsappMessageId: incoming.id,
             receivedAt: new Date()
@@ -76,7 +76,7 @@ export async function POST(req: NextRequest) {
             data: { 
               unsubscribed: true, 
               unsubscribedAt: new Date(),
-              status: LeadStatus.UNSUBSCRIBED
+              status: $Enums.LeadStatus.UNSUBSCRIBED
             }
           });
           
@@ -84,7 +84,7 @@ export async function POST(req: NextRequest) {
             data: {
               userId: lead.userId,
               leadId: lead.id,
-              eventType: EventType.LEAD_UNSUBSCRIBED,
+              eventType: $Enums.EventType.LEAD_UNSUBSCRIBED,
               description: "Lead unsubscribed via keyword"
             }
           });

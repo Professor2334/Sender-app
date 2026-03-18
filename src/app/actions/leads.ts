@@ -1,10 +1,10 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-import { LeadStatus } from "@prisma/client";
+import { $Enums } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
-export async function importLeads(userId: string, leads: any[]) {
+export async function importLeads(userId: string, leads: { phone: string; firstName?: string; lastName?: string; email?: string; source?: string }[]) {
   try {
     const results = await Promise.all(leads.map(async (lead) => {
       // Normalize phone number (simple mock of E.164)
@@ -23,7 +23,7 @@ export async function importLeads(userId: string, leads: any[]) {
           lastName: lead.lastName || undefined,
           email: lead.email || undefined,
           source: lead.source || undefined,
-          status: LeadStatus.NEW,
+          status: $Enums.LeadStatus.NEW,
         },
         create: {
           userId,
@@ -32,7 +32,7 @@ export async function importLeads(userId: string, leads: any[]) {
           lastName: lead.lastName,
           email: lead.email,
           source: lead.source,
-          status: LeadStatus.NEW,
+          status: $Enums.LeadStatus.NEW,
         }
       });
     }));

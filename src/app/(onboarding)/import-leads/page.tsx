@@ -6,11 +6,9 @@ type Step = "UPLOAD" | "MAP" | "PREVIEW" | "SUCCESS";
 
 export default function ImportLeadsPage() {
   const [step, setStep] = useState<Step>("UPLOAD");
-  const [file, setFile] = useState<File | null>(null);
 
   function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {
     if (e.target.files && e.target.files[0]) {
-      setFile(e.target.files[0]);
       setTimeout(() => setStep("MAP"), 600);
     }
   }
@@ -25,7 +23,7 @@ export default function ImportLeadsPage() {
         <div className="space-y-6">
           <h1 className="headline-large">Import Your Leads</h1>
           <p className="body-large text-on-surface-variant">
-            Upload a CSV file containing your lead data. We'll help you map the columns to Send Signal fields.
+            Upload a CSV file containing your lead data. We&apos;ll help you map the columns to Send Signal fields.
           </p>
           
           <div className="border-2 border-dashed border-outline-variant rounded-[2rem] p-12 text-center hover:border-primary/50 hover:bg-primary/5 transition-all cursor-pointer relative group">
@@ -48,7 +46,7 @@ export default function ImportLeadsPage() {
         <div className="space-y-8">
           <h1 className="headline-large">Map Your Columns</h1>
           <p className="body-large text-on-surface-variant">
-            Connect your CSV headers to Send Signal's lead fields.
+            Connect your CSV headers to Send Signal&apos;s lead fields.
           </p>
 
           <div className="space-y-4">

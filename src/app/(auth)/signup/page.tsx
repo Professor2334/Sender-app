@@ -104,7 +104,7 @@ export default function SignUpPage() {
           </div>
           <h2 className="text-on-primary mb-6 headline-large">Join the WhatsApp Outreach Revolution</h2>
           <p className="text-primary-container body-large text-xl">
-            "Send Signal helped us increase our webinar conversion rate by 40% in just two weeks. It's the only tool that feels truly personal at scale."
+            &quot;Send Signal helped us increase our webinar conversion rate by 40% in just two weeks. It&apos;s the only tool that feels truly personal at scale.&quot;
           </p>
           <div className="mt-8 text-on-primary/80 label-large">
             — Sarah Chen, Growth at TechScale

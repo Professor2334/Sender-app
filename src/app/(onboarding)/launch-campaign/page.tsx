@@ -20,7 +20,7 @@ export default function LaunchCampaignPage() {
 
       <h1 className="headline-large text-center mb-4">Launch First Campaign</h1>
       <p className="body-large text-on-surface-variant text-center mb-12">
-        You're one step away from sending your first signal. Review your campaign settings below.
+        You&apos;re one step away from sending your first signal. Review your campaign settings below.
       </p>
 
       <div className="bg-surface border border-outline-variant rounded-3xl overflow-hidden mb-12">

@@ -6,7 +6,7 @@ export default function DashboardOverviewPage() {
       <div className="flex justify-between items-end">
         <div>
           <h1 className="headline-large mb-1">Dashboard Overview</h1>
-          <p className="body-large text-on-surface-variant">Welcome back. Here's what's happening with your signals today.</p>
+          <p className="body-large text-on-surface-variant">Welcome back. Here&apos;s what&apos;s happening with your signals today.</p>
         </div>
         <button className="px-6 py-3 bg-primary text-on-primary rounded-xl label-large hover:shadow-lg hover:shadow-primary/20 transition-all flex items-center gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>

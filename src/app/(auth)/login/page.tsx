@@ -67,7 +67,7 @@ export default function LoginPage() {
             <div className="space-y-1">
               <div className="flex justify-between items-center">
                 <label htmlFor="password" className="label-large text-on-surface-variant">Password</label>
-                <Link href="/forgot-password" size="small" className="label-medium text-primary hover:underline">Forgot password?</Link>
+                <Link href="/forgot-password" className="label-medium text-primary hover:underline">Forgot password?</Link>
               </div>
               <input 
                 id="password"
@@ -96,7 +96,7 @@ export default function LoginPage() {
           </form>
 
           <p className="mt-8 text-center text-on-surface-variant body-large">
-            Don't have an account? <Link href="/signup" className="text-primary font-bold hover:underline">Sign up for free</Link>
+            Don&apos;t have an account? <Link href="/signup" className="text-primary font-bold hover:underline">Sign up for free</Link>
           </p>
         </div>
       </div>

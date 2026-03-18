@@ -118,7 +118,7 @@ export default function MarketingPage() {
                       Hi David, thanks for showing interest in our fitness studio! Want to join a trial class today?
                     </div>
                     <div className="self-start bg-surface-variant p-3 rounded-2xl rounded-tl-none max-w-[80%] text-sm">
-                      Yes! I'd love to try it out.
+                      Yes! I&apos; love to try it out.
                     </div>
                   </div>
                 </div>

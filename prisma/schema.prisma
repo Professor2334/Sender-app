@@ -133,6 +133,7 @@ model WhatsAppAccount {
   leads Lead[]
   campaigns Campaign[]
   conversations Conversation[]
+  messages      Message[]
 
   @@index([businessAccountId])
   @@map("whatsapp_accounts")
@@ -164,6 +165,7 @@ model Lead {
   activityLogs    ActivityLog[]
   conversationMessages ConversationMessage[]
   tagAssignments  LeadTagAssignment[]
+  conversations   Conversation[]
 
   @@unique([userId, phoneNumber])
   @@index([userId])

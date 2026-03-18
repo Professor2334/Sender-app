@@ -1,7 +1,7 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-import { CampaignStatus, MessageStatus, MessageDirection } from "@prisma/client";
+import { $Enums } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
 export async function createCampaign(data: {
@@ -24,7 +24,7 @@ export async function createCampaign(data: {
         name: data.name,
         description: data.description,
         scheduledAt: data.scheduledAt,
-        status: data.scheduledAt ? CampaignStatus.SCHEDULED : CampaignStatus.DRAFT,
+        status: data.scheduledAt ? $Enums.CampaignStatus.SCHEDULED : $Enums.CampaignStatus.DRAFT,
         batchSize: data.batchSize ?? 20,
         delayInSeconds: data.delayInSeconds ?? 1,
         totalRecipients: data.leadIds.length,
@@ -48,7 +48,7 @@ export async function launchCampaign(campaignId: string) {
   try {
     const campaign = await prisma.campaign.update({
       where: { id: campaignId },
-      data: { status: CampaignStatus.RUNNING, startedAt: new Date() }
+      data: { status: $Enums.CampaignStatus.RUNNING, startedAt: new Date() }
     });
 
     // In a real app, this would trigger a background worker or edge function
@@ -65,7 +65,7 @@ export async function launchCampaign(campaignId: string) {
           campaignId_leadId_direction: {
             campaignId,
             leadId: leadItem.leadId,
-            direction: MessageDirection.OUTBOUND
+            direction: $Enums.MessageDirection.OUTBOUND
           }
         },
         update: {}, // Don't overwrite if exists
@@ -75,8 +75,8 @@ export async function launchCampaign(campaignId: string) {
           campaignId,
           leadId: leadItem.leadId,
           campaignLeadId: leadItem.id,
-          direction: MessageDirection.OUTBOUND,
-          status: MessageStatus.QUEUED,
+          direction: $Enums.MessageDirection.OUTBOUND,
+          status: $Enums.MessageStatus.QUEUED,
           queuedAt: new Date(),
         }
       });
