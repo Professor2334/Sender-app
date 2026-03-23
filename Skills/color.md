@@ -455,9 +455,7 @@ Examples of prohibited implementation patterns:
 - `text-red-600`
 - `border-gray-300`
 
-unless those utilities are explicitly mapped to your own token system through configuration.
-
----
+unless those utilities are explicitly mapped to your own token system through configuration
 
 # 16. Final Rule
 
