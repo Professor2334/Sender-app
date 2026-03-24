@@ -1,22 +1,118 @@
 import Link from "next/link";
+import { Metadata } from "next";
+import { MarketingNav } from "../../components/MarketingNav";
+
+export const metadata: Metadata = {
+  title: "Send Signal — WhatsApp Outreach Automation for Campaigns & Lead Messaging",
+  description: "send personalized whatsapp campaign messages",
+  keywords: "WhatsApp marketing, WhatsApp automation, outreach campaigns, lead messaging, bulk WhatsApp messages, campaign analytics, CRM outreach, WhatsApp business API, messaging platform",
+  authors: [{ name: "Send Signal" }],
+  openGraph: {
+    title: "Send Signal — Automate WhatsApp Outreach Campaigns",
+    description: "Launch personalized WhatsApp campaigns, manage leads, track replies, and analyze performance with Send Signal.",
+    type: "website",
+    url: "https://sendsignal.app",
+    images: [{ url: "/og-image.png" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Send Signal — WhatsApp Outreach Automation",
+    description: "Send personalized WhatsApp messages at scale, manage campaigns, and track results with Send Signal.",
+    images: ["/og-image.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  icons: {
+    icon: "/brandlogo.svg",
+  },
+};
 
 export default function MarketingPage() {
+  const features = [
+    {
+      title: "CSV Lead Ingestion",
+      description: "Upload lead lists from any social platform. Our system automatically maps columns and validates phone numbers to E.164 standards.",
+      icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+    },
+    {
+      title: "Dynamic Placeholders",
+      description: "Craft messages that feel personal. Use {first_name}, {source}, or custom tags to tailor your outreach to every individual lead.",
+      icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
+    },
+    {
+      title: "Batch Sending with Delays",
+      description: "Stay compliant with WhatsApp Business API rate limits. Define batch sizes and sending intervals for optimal delivery performance.",
+      icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    },
+    {
+      title: "Reply Monitoring",
+      description: "Never miss a conversation. Track replies in real-time and handle follow-ups directly through our unified dashboard.",
+      icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    },
+    {
+      title: "Auto-Unsubscribe",
+      description: "Automatic detection of keywords like STOP or CANCEL. We ensure you only message leads who want to hear from you.",
+      icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+    },
+    {
+      title: "Conversion Tracking",
+      description: "Measure the ROI of your WhatsApp campaigns. Track who converts from a signal to a successful customer.",
+      icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+    }
+  ];
+
+  const plans = [
+    {
+      name: "Starter",
+      description: "For individuals testing their first signals.",
+      price: "0",
+      features: [
+        "100 messages per month",
+        "Single user access",
+        "One lead source connection",
+        "Basic CSV import",
+        "Community support"
+      ],
+      cta: "Start for Free",
+      highlighted: false
+    },
+    {
+      name: "Pro",
+      description: "For growing teams and active outreach.",
+      price: "20",
+      features: [
+        "5,000 messages per month",
+        "Up to 5 team members",
+        "Unlimited lead sources",
+        "Message scheduling",
+        "Drip campaigns (Beta)",
+        "Priority email support"
+      ],
+      cta: "Get Started with Pro",
+      highlighted: true
+    },
+    {
+      name: "Enterprise",
+      description: "Custom solutions for large agencies.",
+      price: "Custom",
+      features: [
+        "Unlimited messages",
+        "Unlimited team members",
+        "Custom API access",
+        "Dedicated account manager",
+        "SLA & Compliance audit",
+        "SSO Integration"
+      ],
+      cta: "Contact Sales",
+      highlighted: false
+    }
+  ];
+
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* Navigation */}
-      <nav className="flex items-center justify-between px-8 py-6 border-b border-outline-variant bg-surface/50 backdrop-blur-md sticky top-0 z-50">
-        <Link href="/" className="text-primary font-bold text-2xl tracking-tight">
-          Send Signal
-        </Link>
-        <div className="hidden md:flex items-center gap-8">
-          <Link href="/features" className="text-on-surface-variant hover:text-primary transition-colors label-large">Features</Link>
-          <Link href="/pricing" className="text-on-surface-variant hover:text-primary transition-colors label-large">Pricing</Link>
-          <Link href="/login" className="text-on-surface-variant hover:text-primary transition-colors label-large">Login</Link>
-          <Link href="/signup" className="px-6 py-2 bg-primary text-on-primary rounded-full label-large hover:opacity-90 transition-opacity">
-            Get Started
-          </Link>
-        </div>
-      </nav>
+    <div className="flex flex-col h-screen">
+      <MarketingNav />
 
       <main className="flex-grow">
         {/* Hero Section */}
@@ -27,42 +123,34 @@ export default function MarketingPage() {
           <p className="text-on-surface-variant body-large max-w-2xl mb-10 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-200">
             Automate personalized WhatsApp campaigns for your social media leads. High response rates, effortless automation, and complete compliance.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-500">
-            <Link href="/signup" className="px-8 py-4 bg-primary text-on-primary rounded-full label-large text-lg hover:shadow-lg hover:shadow-primary/20 transition-all">
+          <div className="flex justify-center w-full animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-500">
+            <Link href="/signup" className="px-8 py-4 bg-primary text-on-primary rounded-full label-large text-lg hover:bg-tertiary hover:text-on-tertiary hover:shadow-lg hover:shadow-tertiary/20 transition-all">
               Start Free Campaign
-            </Link>
-            <Link href="/features" className="px-8 py-4 border border-outline rounded-full label-large text-lg hover:bg-surface-variant transition-colors">
-              See How It Works
             </Link>
           </div>
         </section>
 
-        {/* Feature Highlights */}
-        <section className="px-8 py-24 bg-surface-container/50 border-y border-outline-variant">
-          <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-12">
-            <div className="flex flex-col gap-4 p-8 rounded-3xl bg-surface border border-outline-variant hover:border-primary transition-colors group">
-              <div className="w-12 h-12 rounded-2xl bg-primary-container flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="19" cy="11" r="3"/></svg>
-              </div>
-              <h3 className="title-medium text-xl">High-Volume Lead Import</h3>
-              <p className="text-on-surface-variant body-large">Import CSVs from TikTok, Twitter, and Facebook ads effortlessly. Automate lead capture and management.</p>
-            </div>
-            
-            <div className="flex flex-col gap-4 p-8 rounded-3xl bg-surface border border-outline-variant hover:border-primary transition-colors group text-on-surface">
-              <div className="w-12 h-12 rounded-2xl bg-secondary-container flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              </div>
-              <h3 className="title-medium text-xl">Dynamic Personalization</h3>
-              <p className="text-on-surface-variant body-large">Create message templates with placeholders. Inject personal details to make every message feel one-to-one.</p>
-            </div>
+        {/* Features Section */}
+        <section id="features" className="px-8 py-24 max-w-7xl mx-auto w-full">
+          <div className="text-center mb-16">
+            <h2 className="headline-large mb-4">Powerful Features for Signal Outreach</h2>
+            <p className="body-large text-on-surface-variant max-w-2xl mx-auto">
+              Everything you need to automate, personalize, and track your WhatsApp outreach campaigns in one unified platform.
+            </p>
+          </div>
 
-            <div className="flex flex-col gap-4 p-8 rounded-3xl bg-surface border border-outline-variant hover:border-primary transition-colors group">
-              <div className="w-12 h-12 rounded-2xl bg-tertiary-container flex items-center justify-center text-tertiary group-hover:scale-110 transition-transform">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-bar-chart-3"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {features.map((feature, idx) => (
+              <div key={idx} className="p-8 rounded-3xl bg-surface border border-outline-variant hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5 transition-all group">
+                <div className="w-12 h-12 rounded-2xl bg-surface-variant flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-on-primary transition-all mb-6">
+                  {feature.icon}
+                </div>
+                <h3 className="title-medium text-xl mb-3">{feature.title}</h3>
+                <p className="text-on-surface-variant body-large leading-relaxed">
+                  {feature.description}
+                </p>
               </div>
-              <h3 className="title-medium text-xl">Real-time Analytics</h3>
-              <p className="text-on-surface-variant body-large">Track delivery, read rates, and replies. Optimize your campaigns for conversion and growth.</p>
-            </div>
+            ))}
           </div>
         </section>
 
@@ -123,6 +211,64 @@ export default function MarketingPage() {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Pricing Section */}
+        <section id="pricing" className="px-8 py-24 bg-surface-container/50 w-full">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-20">
+              <h2 className="headline-large mb-4">Simple, Scalable Pricing</h2>
+              <p className="body-large text-on-surface-variant max-w-2xl mx-auto">
+                Choose the plan that fits your current lead volume. Upgrade or downgrade at any time as your signals grow.
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-3 gap-8 items-stretch">
+              {plans.map((plan, idx) => (
+                <div 
+                  key={idx} 
+                  className={`p-10 rounded-[2.5rem] flex flex-col border transition-all duration-500 ${
+                    plan.highlighted 
+                    ? "bg-surface border-primary shadow-2xl shadow-primary/10 scale-105 z-10" 
+                    : "bg-surface/50 border-outline-variant hover:border-outline"
+                  }`}
+                >
+                  <div className="mb-8">
+                    <h3 className="title-medium text-2xl mb-2">{plan.name}</h3>
+                    <p className="text-on-surface-variant label-medium">{plan.description}</p>
+                  </div>
+
+                  <div className="mb-8 flex items-baseline gap-1">
+                    <span className="text-4xl font-bold">{plan.price === "Custom" ? "" : "$"}</span>
+                    <span className="text-6xl font-black">{plan.price}</span>
+                    {plan.price !== "Custom" && <span className="text-on-surface-variant label-large">/month</span>}
+                  </div>
+
+                  <ul className="space-y-4 mb-10 flex-grow">
+                    {plan.features.map((feature, fidx) => (
+                      <li key={fidx} className="flex gap-3 items-center text-on-surface-variant body-large">
+                        <div className="text-primary">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <Link 
+                    href={plan.price === "Custom" ? "/contact" : "/signup"}
+                    className={`w-full py-4 rounded-full label-large text-center text-lg transition-all ${
+                      plan.highlighted 
+                      ? "bg-primary text-on-primary hover:bg-tertiary hover:text-on-tertiary hover:shadow-lg hover:shadow-tertiary/30" 
+                      : "bg-surface-variant text-on-surface-variant hover:bg-outline-variant"
+                    }`}
+                  >
+                    {plan.cta}
+                  </Link>
+                </div>
+              ))}
             </div>
           </div>
         </section>

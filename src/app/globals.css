@@ -1,6 +1,12 @@
 @import "tailwindcss";
 @import "./design-tokens.css";
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 :root {
   /* Map standard variables to our system tokens */
   --background: var(--color-roles-neutral-role-neutral-container-lowest-sys);

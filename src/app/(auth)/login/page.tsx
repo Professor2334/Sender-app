@@ -43,7 +43,11 @@ export default function LoginPage() {
       {/* Form Side */}
       <div className="flex-1 flex flex-col justify-center px-8 md:px-24 py-12 relative z-10">
         <div className="max-w-md w-full mx-auto">
-          <Link href="/" className="text-primary font-bold text-2xl mb-12 block">
+          <Link href="/" className="flex items-center gap-3 text-on-surface font-bold text-2xl tracking-tight mb-12 w-fit">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8 text-primary">
+              <path d="M22 2 11 13" />
+              <path d="M22 2 15 22 11 13 2 9 22 2z" />
+            </svg>
             Send Signal
           </Link>
           

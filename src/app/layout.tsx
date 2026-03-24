@@ -10,6 +10,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Send Signal | Automated Personalized WhatsApp Outreach",
   description: "Automate your WhatsApp outreach campaigns with personalized messages, CRM integration, and analytics.",
+  icons: {
+    icon: "/brandlogo.svg",
+  },
 };
 
 export default function RootLayout({
