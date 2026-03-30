@@ -51,41 +51,36 @@ export default function LoginPage() {
             Send Signal
           </Link>
           
-          <h1 className="headline-large mb-2 text-on-surface">Welcome Back</h1>
-          <p className="body-large text-on-surface-variant mb-8">
-            Enter your credentials to access your campaign dashboard.
-          </p>
+          <h1 className="headline-large mb-8 text-on-surface">Sign In</h1>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
-              <label htmlFor="email" className="label-large text-on-surface-variant">Email Address</label>
+              <label htmlFor="email" className="label-large text-on-surface-variant/70">Work email</label>
               <input 
                 id="email"
                 type="email" 
                 required 
-                className="w-full px-4 py-3 rounded-xl border border-outline bg-surface focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-on-surface"
-                placeholder="you@company.com"
+                className="w-full px-4 py-3 rounded-xl border border-outline-variant bg-neutral hover:border-outline focus:outline-none focus:border-primary hover:bg-surface-variant/30 focus:scale-[1.01] focus:shadow-lg transition-all duration-1000 text-on-surface"
               />
             </div>
 
             <div className="space-y-1">
               <div className="flex justify-between items-center">
-                <label htmlFor="password" className="label-large text-on-surface-variant">Password</label>
+                <label htmlFor="password" className="label-large text-on-surface-variant/70">Password</label>
                 <Link href="/forgot-password" className="label-medium text-primary hover:underline">Forgot password?</Link>
               </div>
               <input 
                 id="password"
                 type="password" 
                 required 
-                className="w-full px-4 py-3 rounded-xl border border-outline bg-surface focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-on-surface"
-                placeholder="••••••••"
+                className="w-full px-4 py-3 rounded-xl border border-outline-variant bg-neutral hover:border-outline focus:outline-none focus:border-primary hover:bg-surface-variant/30 focus:scale-[1.01] focus:shadow-lg transition-all duration-1000 text-on-surface"
               />
             </div>
 
             <button 
               type="submit" 
               disabled={loading}
-              className="w-full py-4 bg-primary text-on-primary rounded-xl label-large text-lg hover:shadow-lg hover:shadow-primary/20 transition-all flex items-center justify-center gap-2 disabled:opacity-70"
+              className="w-full py-4 bg-primary text-on-primary rounded-xl label-large text-lg hover:shadow-lg hover:shadow-primary/20 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
             >
               {loading ? (
                 <>

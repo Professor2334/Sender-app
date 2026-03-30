@@ -207,7 +207,7 @@ minimum database entities include :
 - Analytics data
 
 ### Idempotent messaging 
-Campaigb messaging requires idemptent behaviour.
+Campaign messaging requires idemptent behaviour.
 
 Each message will be uniquely identified by a lead id and a campaign id. 
 

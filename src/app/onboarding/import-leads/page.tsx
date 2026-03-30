@@ -128,7 +128,7 @@ export default function ImportLeadsPage() {
           </div>
 
           <button 
-            onClick={() => window.location.href = "/onboarding/create-template"}
+            onClick={() => window.location.href = "/onboarding/dashboard-orientation"}
             className="w-full py-5 bg-primary text-on-primary rounded-2xl label-large text-xl hover:shadow-xl hover:shadow-primary/20 transition-all"
           >
             Import 124 Leads

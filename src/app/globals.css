@@ -44,6 +44,7 @@
   
   --color-warning: var(--color-roles-warning-role-warning-color-role-sys);
   --color-on-warning: var(--color-roles-warning-role-on-warning-color-role-sys);
+  --color-neutral: var(--color-roles-neutral-role-neutral-color-role-sys);
 }
 
 @theme inline {
@@ -83,6 +84,8 @@
   
   --color-warning: var(--color-warning);
   --color-on-warning: var(--color-on-warning);
+  --color-neutral-container-low: var(--color-neutral-container-low);
+  --color-neutral: var(--color-neutral);
 }
 
 body {
@@ -117,6 +120,13 @@ h2, .headline-large {
   letter-spacing: calc(var(--typography-title-title-medium-letterspacing-sys) / 16 * 1rem);
 }
 
+.title-large {
+  font-size: calc(var(--typography-title-title-large-fontsize-sys) / 16 * 1rem);
+  font-weight: var(--typography-title-title-large-fontweight-sys);
+  line-height: calc(var(--typography-title-title-large-lineheight-sys) / 16 * 1rem);
+  letter-spacing: calc(var(--typography-title-title-large-letterspacing-sys) / 16 * 1rem);
+}
+
 .body-large {
   font-size: calc(var(--typography-body-body-large-fontsize-sys) / 16 * 1rem);
   font-weight: var(--typography-body-body-large-fontweight-sys);
@@ -136,4 +146,10 @@ h2, .headline-large {
   font-weight: var(--typography-label-label-medium-fontweight-sys);
   line-height: calc(var(--typography-label-label-medium-lineheight-sys) / 16 * 1rem);
   letter-spacing: calc(var(--typography-label-label-medium-letterspacing-sys) / 16 * 1rem);
+}
+
+.title-18 {
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600;
+  line-height: 1.5rem;
 }
