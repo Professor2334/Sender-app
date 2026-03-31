@@ -1,9 +1,7 @@
+import EmptyState from "@/components/dashboard/EmptyState";
+
 export default function CampaignsPage() {
-  const campaigns = [
-    { id: 1, name: "Webinar Follow-up", status: "Running", progress: 84, sent: 1008, recipients: 1200, date: "Mar 16, 2026" },
-    { id: 2, name: "Product Launch", status: "Scheduled", progress: 0, sent: 0, recipients: 5000, date: "Mar 18, 2026" },
-    { id: 3, name: "Re-engagement Jan", status: "Completed", progress: 100, sent: 842, recipients: 842, date: "Jan 12, 2026" },
-  ];
+  const campaigns: any[] = [];
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -29,7 +27,8 @@ export default function CampaignsPage() {
         </button>
       </div>
 
-      <div className="space-y-6">
+      {campaigns.length > 0 ? (
+        <div className="space-y-6">
         {campaigns.map((campaign) => (
           <div key={campaign.id} className="p-8 rounded-[2.5rem] bg-surface border border-outline-variant hover:border-primary/50 transition-all flex flex-col md:flex-row gap-8 items-center">
             <div className="flex-1 space-y-2 text-center md:text-left">
@@ -68,7 +67,18 @@ export default function CampaignsPage() {
             </div>
           </div>
         ))}
-      </div>
+        </div>
+      ) : (
+        <div className="bg-surface border border-outline-variant rounded-[2.5rem] py-16">
+          <EmptyState 
+            icon={<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>}
+            title="No campaigns yet"
+            description="Create your first campaign to start sending automated outreach signals to your leads."
+            actionText="Launch Campaign"
+            actionHref="/dashboard/campaigns"
+          />
+        </div>
+      )}
     </div>
   );
 }

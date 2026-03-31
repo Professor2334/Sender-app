@@ -1,9 +1,7 @@
+import EmptyState from "@/components/dashboard/EmptyState";
+
 export default function TemplatesPage() {
-  const templates = [
-    { id: 1, name: "Welcome Signal", body: "Hi {{first_name}}, thanks for showing interest in Send Signal!...", category: "Onboarding", date: "Mar 16, 2026" },
-    { id: 2, name: "Follow-up Offer", body: "Hey {{first_name}}, we noticed you haven't finished...", category: "Nurture", date: "Mar 15, 2026" },
-    { id: 3, name: "Webinar Invite", body: "Don't miss out on our upcoming session on {{date}}...", category: "Events", date: "Mar 14, 2026" },
-  ];
+  const templates: any[] = [];
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
@@ -18,7 +16,8 @@ export default function TemplatesPage() {
         </button>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {templates.length > 0 ? (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {templates.map((template) => (
           <div key={template.id} className="p-8 rounded-[2rem] bg-surface border border-outline-variant hover:border-primary/50 transition-all group flex flex-col h-full bg-surface-container-lowest">
             <div className="flex justify-between items-start mb-6">
@@ -55,7 +54,18 @@ export default function TemplatesPage() {
             <p className="label-medium text-on-surface-variant">Draft your next signal</p>
           </div>
         </button>
-      </div>
+        </div>
+      ) : (
+        <div className="bg-surface border border-outline-variant rounded-[2.5rem] py-16">
+          <EmptyState 
+            icon={<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>}
+            title="No templates yet"
+            description="Create reusable message templates to speed up your outreach workflow."
+            actionText="Create Template"
+            actionHref="/dashboard/templates"
+          />
+        </div>
+      )}
     </div>
   );
 }

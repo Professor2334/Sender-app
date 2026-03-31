@@ -113,6 +113,14 @@ h2, .headline-large {
   text-transform: var(--typography-headline-headline-large-textcase-sys);
 }
 
+.headline-medium {
+  font-size: calc(var(--typography-headline-headline-medium-fontsize-sys) / 16 * 1rem);
+  font-weight: var(--typography-headline-headline-medium-fontweight-sys);
+  line-height: calc(var(--typography-headline-headline-medium-lineheight-sys) / 16 * 1rem);
+  letter-spacing: calc(var(--typography-headline-headline-medium-letterspacing-sys) / 16 * 1rem);
+  text-transform: var(--typography-headline-headline-medium-textcase-sys);
+}
+
 .title-medium {
   font-size: calc(var(--typography-title-title-medium-fontsize-sys) / 16 * 1rem);
   font-weight: var(--typography-title-title-medium-fontweight-sys);

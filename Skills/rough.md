@@ -57,3 +57,5 @@ on the create account form when a user enter a valid field,change the background
 # onboading phase 
 - step 1 - welcome to sendsignal,and a title head saying let get you start with a short description beneath it,and a button indicating to Next  button  with an arrow icon that will take user to step 2,
 - remove the top line  border of the onboarding page
+- in the step 1 of 4 in the onboarding process recreate the blue indicator bar positioned above step 1 of 4,make the indicator modern,and stay on on 4 onboarding phase as the steps changes 
+ and i want the onboading to be SPA ,dont change pages ,do the four onboarding on one page while pressing next to the next step

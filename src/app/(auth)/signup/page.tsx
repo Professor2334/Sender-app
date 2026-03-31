@@ -100,7 +100,7 @@ export default function SignUpPage() {
 
     setLoading(true);
     await new Promise(r => setTimeout(r, 1500));
-    window.location.href = "/onboarding/welcome";
+    window.location.href = "/onboarding";
   }
 
   return (
@@ -203,7 +203,7 @@ export default function SignUpPage() {
           </form>
 
           <p className="mt-8 text-center text-on-surface-variant body-large">
-            Already have an account? <Link href="/login" className="text-primary font-bold hover:underline">Log in</Link>
+            Already have an account? <Link href="/login" className="text-primary font-bold hover:underline">Sign in</Link>
           </p>
         </div>
       </div>

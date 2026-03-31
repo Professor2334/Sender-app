@@ -2,7 +2,12 @@
 
 import { useState } from "react";
 
-export default function DashboardOrientationPage() {
+interface OrientationStepProps {
+  onFinish: () => void;
+  onBack?: () => void;
+}
+
+export default function OrientationStep({ onFinish, onBack }: OrientationStepProps) {
   const [loading, setLoading] = useState(false);
 
   const features = [
@@ -32,17 +37,17 @@ export default function DashboardOrientationPage() {
   const handleFinish = async () => {
     setLoading(true);
     await new Promise(r => setTimeout(r, 1000));
-    window.location.href = "/dashboard";
+    onFinish();
   };
 
   return (
     <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 max-w-xl mx-auto">
-      <div className="w-16 h-16 bg-primary-container rounded-3xl flex items-center justify-center text-primary mb-8">
+      <div className="w-16 h-16 bg-primary-container rounded-3xl flex items-center justify-center text-primary mb-8 mx-auto">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
       </div>
 
-      <h1 className="title-large mb-4 font-bold text-on-surface">You&apos;re All Set!</h1>
-      <p className="body-large text-on-surface-variant mb-12">
+      <h1 className="title-large mb-6 text-on-surface font-bold text-center">You&apos;re All Set!</h1>
+      <p className="body-small text-outline mb-12 text-center leading-relaxed">
         We&apos;ve configured your workspace and imported your leads. Here&apos;s a quick look at what you can do next.
       </p>
 
@@ -53,33 +58,47 @@ export default function DashboardOrientationPage() {
               {feature.icon}
             </div>
             <div className="space-y-1">
-              <h3 className="title-medium">{feature.title}</h3>
+              <h3 className="title-medium text-on-surface font-bold">{feature.title}</h3>
               <p className="body-medium text-on-surface-variant">{feature.description}</p>
             </div>
           </div>
         ))}
       </div>
 
-      <button 
-        onClick={handleFinish}
-        disabled={loading}
-        className="w-full py-5 bg-primary text-on-primary rounded-2xl label-large text-xl hover:shadow-xl hover:shadow-primary/20 transition-all flex items-center justify-center gap-3 disabled:opacity-70 cursor-pointer"
-      >
-        {loading ? (
-           <>
-            <svg className="animate-spin h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-            Taking you home...
-          </>
-        ) : (
-          <>
-            Go to Dashboard
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" x2="19" y1="12" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </>
+      <div className="flex items-center gap-4 mt-8">
+        {onBack && (
+          <button 
+            onClick={onBack}
+            disabled={loading}
+            className="px-8 py-5 border border-outline rounded-2xl label-large text-xl text-on-surface-variant hover:bg-surface-variant transition-colors cursor-pointer"
+          >
+            Back
+          </button>
         )}
-      </button>
+        <button 
+          onClick={handleFinish}
+          disabled={loading}
+          className="flex-1 py-5 bg-primary text-on-primary rounded-2xl label-large text-xl hover:bg-tertiary hover:text-on-tertiary transition-colors flex items-center justify-center gap-3 group disabled:opacity-70 cursor-pointer"
+        >
+          {loading ? (
+             <>
+              <svg className="animate-spin h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Taking you home...
+            </>
+          ) : (
+            <>
+              Go to Dashboard
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-1 transition-transform">
+                <line x1="5" x2="19" y1="12" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </>
+          )}
+        </button>
+      </div>
     </div>
   );
 }

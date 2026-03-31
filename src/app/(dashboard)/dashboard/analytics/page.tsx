@@ -1,11 +1,15 @@
+import EmptyState from "@/components/dashboard/EmptyState";
+
 export default function AnalyticsPage() {
+  const hasData = false;
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
       <div>
         <h1 className="headline-large mb-1">Campaign Analytics</h1>
         <p className="body-large text-on-surface-variant">Deep dive into your outreach performance and conversion metrics.</p>
       </div>
-
+      {hasData ? (
+        <>
       {/* Date Range Selector Placeholder */}
       <div className="flex gap-4 p-4 rounded-2xl bg-surface border border-outline-variant items-center justify-between">
          <div className="flex gap-4">
@@ -84,6 +88,18 @@ export default function AnalyticsPage() {
            ))}
         </div>
       </div>
+        </>
+      ) : (
+        <div className="bg-surface border border-outline-variant rounded-[2.5rem] py-16">
+          <EmptyState 
+            icon={<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>}
+            title="No analytics yet"
+            description="Once you launch your first campaign, your performance and engagement metrics will appear here."
+            actionText="Go to Campaigns"
+            actionHref="/dashboard/campaigns"
+          />
+        </div>
+      )}
     </div>
   );
 }

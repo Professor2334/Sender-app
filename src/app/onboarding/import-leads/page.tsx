@@ -21,7 +21,7 @@ export default function ImportLeadsPage() {
 
       {step === "UPLOAD" && (
         <div className="space-y-6">
-          <h1 className="headline-large">Import Your Leads</h1>
+          <h1 className="title-large font-bold text-on-surface">Import Your Leads</h1>
           <p className="body-large text-on-surface-variant">
             Upload a CSV file containing your lead data. We&apos;ll help you map the columns to Send Signal fields.
           </p>
@@ -44,7 +44,7 @@ export default function ImportLeadsPage() {
 
       {step === "MAP" && (
         <div className="space-y-8">
-          <h1 className="headline-large">Map Your Columns</h1>
+          <h1 className="title-large font-bold text-on-surface">Map Your Columns</h1>
           <p className="body-large text-on-surface-variant">
             Connect your CSV headers to Send Signal&apos;s lead fields.
           </p>
@@ -78,7 +78,7 @@ export default function ImportLeadsPage() {
 
           <button 
             onClick={() => setStep("PREVIEW")}
-            className="w-full py-5 bg-primary text-on-primary rounded-2xl label-large text-xl hover:shadow-xl hover:shadow-primary/20 transition-all"
+            className="w-full py-5 bg-primary text-on-primary rounded-2xl label-large text-xl hover:shadow-xl hover:shadow-primary/20 transition-all cursor-pointer"
           >
             Review & Validate
           </button>
@@ -89,7 +89,7 @@ export default function ImportLeadsPage() {
         <div className="space-y-8">
           <div className="flex justify-between items-end">
             <div>
-              <h1 className="headline-large mb-2">Preview Leads</h1>
+              <h1 className="title-large mb-2 font-bold text-on-surface">Preview Leads</h1>
               <p className="body-large text-on-surface-variant"> We found 124 leads in your file.</p>
             </div>
             <div className="px-4 py-1.5 rounded-full bg-success-container text-success label-medium flex items-center gap-2">
@@ -129,7 +129,7 @@ export default function ImportLeadsPage() {
 
           <button 
             onClick={() => window.location.href = "/onboarding/dashboard-orientation"}
-            className="w-full py-5 bg-primary text-on-primary rounded-2xl label-large text-xl hover:shadow-xl hover:shadow-primary/20 transition-all"
+            className="w-full py-5 bg-primary text-on-primary rounded-2xl label-large text-xl hover:shadow-xl hover:shadow-primary/20 transition-all cursor-pointer"
           >
             Import 124 Leads
           </button>

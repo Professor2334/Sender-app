@@ -18,7 +18,7 @@ export default function ConnectWhatsAppPage() {
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-11.5 8.38 8.38 0 0 1 3.8.9L22 2l-1.5 5.5Z"/></svg>
       </div>
       
-      <h1 className="headline-large mb-4">Connect WhatsApp Business</h1>
+      <h1 className="title-large mb-4 font-bold">Connect WhatsApp Business</h1>
       <p className="body-large text-on-surface-variant mb-8 leading-relaxed">
         Send Signal uses the official WhatsApp Business API to ensure your messages are delivered reliably and your account stays compliant.
       </p>
@@ -48,7 +48,7 @@ export default function ConnectWhatsAppPage() {
         <button 
           onClick={handleConnect}
           disabled={loading}
-          className="w-full py-5 bg-[#25D366] text-white rounded-2xl label-large text-xl hover:opacity-90 transition-all flex items-center justify-center gap-3 disabled:opacity-70 shadow-xl shadow-[#25D366]/20"
+          className="w-full py-5 bg-[#25D366] text-white rounded-2xl label-large text-xl hover:opacity-90 transition-all flex items-center justify-center gap-3 disabled:opacity-70 shadow-xl shadow-[#25D366]/20 cursor-pointer"
         >
           {loading ? (
              <>
@@ -67,7 +67,7 @@ export default function ConnectWhatsAppPage() {
         
         <button 
           onClick={() => window.location.href = "/onboarding/import-leads"}
-          className="w-full py-4 border border-outline rounded-2xl label-large text-on-surface-variant hover:bg-surface-variant transition-colors"
+          className="w-full py-4 border border-outline rounded-2xl label-large text-on-surface-variant hover:bg-surface-variant transition-colors cursor-pointer"
         >
           Setup manually with API keys
         </button>

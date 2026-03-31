@@ -43,7 +43,7 @@ export default function LoginPage() {
       {/* Form Side */}
       <div className="flex-1 flex flex-col justify-center px-8 md:px-24 py-12 relative z-10">
         <div className="max-w-md w-full mx-auto">
-          <Link href="/" className="flex items-center gap-3 text-on-surface font-bold text-2xl tracking-tight mb-12 w-fit">
+          <Link href="/" className="flex items-center gap-3 text-on-surface font-bold text-2xl tracking-tight mb-5 w-fit">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8 text-primary">
               <path d="M22 2 11 13" />
               <path d="M22 2 15 22 11 13 2 9 22 2z" />
@@ -51,7 +51,7 @@ export default function LoginPage() {
             Send Signal
           </Link>
           
-          <h1 className="headline-large mb-8 text-on-surface">Sign In</h1>
+          <h1 className="title-18 mb-[15px] text-on-surface" style={{letterSpacing: "-0.05em"}}>Sign In</h1>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
@@ -90,12 +90,12 @@ export default function LoginPage() {
                   </svg>
                   Logging in...
                 </>
-              ) : "Log In"}
+              ) : "Sign In"}
             </button>
           </form>
 
           <p className="mt-8 text-center text-on-surface-variant body-large">
-            Don&apos;t have an account? <Link href="/signup" className="text-primary font-bold hover:underline">Sign up for free</Link>
+            Don&apos;t have an account? <Link href="/signup" className="text-primary font-bold hover:underline">Create Account for free</Link>
           </p>
         </div>
       </div>

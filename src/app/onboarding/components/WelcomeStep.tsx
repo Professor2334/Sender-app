@@ -2,28 +2,24 @@
 
 import { useState } from "react";
 
-export default function WelcomePage() {
+interface WelcomeStepProps {
+  onNext: () => void;
+}
+
+export default function WelcomeStep({ onNext }: WelcomeStepProps) {
   const [loading, setLoading] = useState(false);
 
   const handleNext = async () => {
     setLoading(true);
-    // Smooth transition
     await new Promise(r => setTimeout(r, 600));
-    window.location.href = "/onboarding/connect-whatsapp";
+    onNext();
   };
 
   return (
-    <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-xl mx-auto text-center pt-12">
-      <h1 className="title-large text-on-surface mb-4 font-bold">Welcome to Send Signal</h1>
+    <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 text-center">
+      <h1 className="title-large mb-6 text-on-surface font-bold">Let&apos;s get you set up</h1>
       
-      {/* Horizontal Progress Bar */}
-      <div className="w-32 h-1.5 bg-primary rounded-full mx-auto mb-3"></div>
-      
-      <p className="label-small text-on-surface-variant mb-12">Step 1 of 4</p>
-
-      <h2 className="title-large mb-6 text-on-surface font-bold">Let&apos;s get you set up</h2>
-      
-      <p className="body-large text-outline mb-12 leading-relaxed">
+      <p className="body-small text-outline mb-12 leading-relaxed">
         Send Signal helps you automate personalized WhatsApp outreach campaigns. We&apos;ll guide you through connecting your account, importing leads, and setting up your first message template.
       </p>
 
@@ -31,7 +27,7 @@ export default function WelcomePage() {
         <button 
           onClick={handleNext}
           disabled={loading}
-          className="w-full py-5 bg-primary text-on-primary rounded-2xl label-large text-xl hover:shadow-xl hover:shadow-primary/20 transition-all flex items-center justify-center gap-3 group disabled:opacity-70 cursor-pointer"
+          className="w-full py-5 bg-primary text-on-primary rounded-2xl label-large text-xl hover:bg-tertiary hover:text-on-tertiary transition-colors flex items-center justify-center gap-3 group disabled:opacity-70 cursor-pointer"
         >
           {loading ? (
              <svg className="animate-spin h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -58,10 +54,6 @@ export default function WelcomePage() {
             </>
           )}
         </button>
-
-        <p className="label-small text-on-surface-variant">
-          Estimated setup time: 3-5 minutes
-        </p>
       </div>
     </div>
   );
