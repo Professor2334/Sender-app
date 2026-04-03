@@ -7,7 +7,7 @@ export function MarketingNav() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-surface/50 backdrop-blur-md sticky top-0 z-50 border-transparent">
+    <nav className="bg-surface/50 backdrop-blur-md sticky top-0 z-50 border-outline-variant">
       {/* Desktop & Mobile Header Row */}
       <div className="flex items-center justify-between px-2 md:px-24 py-6">
         <Link href="/" className="flex items-center gap-3 text-on-surface font-bold text-2xl tracking-tight z-10 w-auto md:w-[180px]">
