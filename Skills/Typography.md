@@ -24,7 +24,7 @@ use the type scale in  the design tokens
 
 ## Usage guidelines
 - Page display text should use Display Large 
-- Section titles should use heaadlines large
+- Section titles should use headlines large
 - Button labels should use label large
 - Form labels should use medium or label large
 - Standard paragraphs and body text should use body large
@@ -34,4 +34,4 @@ use the type scale in  the design tokens
 - All text size must be measured in rem and not pixels
 - All heading and display text must use the clamp function in css
 - Low constrast text combination are avoided 
-- Text placed on colored surfaces uses the matching "on-*" color token. Okay, now I want you to go through these three MDs I pasted in this box. And the three MDs are my typography.md, my color.md, and my skills.md. So I want you to go through these three MDs files, read it carefully, go through it, and save it to your memory along with the rest of the details you have on SendSignal products.
+- Text placed on colored surfaces uses the matching "on-*" color token.
