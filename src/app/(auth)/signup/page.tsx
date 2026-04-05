@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 
 export default function SignUpPage() {
   const [loading, setLoading] = useState(false);
+  const [serverError, setServerError] = useState("");
   const [values, setValues] = useState({ company: "", email: "", password: "" });
   const [errors, setErrors] = useState<{ company?: string; email?: string; password?: string }>({});
   const [touched, setTouched] = useState<{ company?: boolean; email?: boolean; password?: boolean }>({});
@@ -99,8 +100,34 @@ export default function SignUpPage() {
     }
 
     setLoading(true);
-    await new Promise(r => setTimeout(r, 1500));
-    window.location.href = "/onboarding";
+    setServerError("");
+    try {
+      const res = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: values.email,
+          password: values.password,
+          companyName: values.company,
+        }),
+      });
+      // We check for account creation, but ensure a smooth transition to onboarding
+      const data = await res.json();
+      if (!res.ok) {
+        setServerError(data.error ?? "Something went wrong. Please try again.");
+        setLoading(false);
+        return;
+      }
+
+      // Restore simulated smooth transition to onboarding
+      setTimeout(() => {
+        window.location.href = "/onboarding";
+      }, 800);
+      
+    } catch {
+      setServerError("Network error. Please check your connection and try again.");
+      setLoading(false);
+    }
   }
 
   return (
@@ -184,6 +211,12 @@ export default function SignUpPage() {
               )}
               {errors.password && !values.password && <p className="text-error label-medium mt-1">{errors.password}</p>}
             </div>
+
+            {serverError && (
+              <div className="p-3 rounded-xl border border-error/40 bg-error/10 text-error label-medium">
+                {serverError}
+              </div>
+            )}
 
             <button 
               type="submit" 

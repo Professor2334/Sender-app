@@ -13,11 +13,40 @@ export default function ConnectStep({ onNext, onBack }: ConnectStepProps) {
   const [phoneIdTouched, setPhoneIdTouched] = useState(false);
   const [token, setToken] = useState("");
   const [tokenTouched, setTokenTouched] = useState(false);
+  const [serverError, setServerError] = useState("");
+
+  // Relaxed validation: Just check if not empty for development bypass
+  const phoneIdValid = phoneId.trim().length > 0;
+  const tokenValid = token.trim().length > 0;
 
   async function handleNext() {
+    setPhoneIdTouched(true);
+    setTokenTouched(true);
+    setServerError("");
+
+    if (!phoneIdValid || !tokenValid) return;
+
     setLoading(true);
-    await new Promise(r => setTimeout(r, 600));
-    onNext();
+    try {
+      const res = await fetch("/api/whatsapp/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          phoneNumberId: phoneId.trim(),
+          accessToken: token.trim(),
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setServerError(data.error ?? "Verification failed. Please check your credentials.");
+        return;
+      }
+      onNext();
+    } catch {
+      setServerError("Network error. Please check your connection and try again.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -35,12 +64,21 @@ export default function ConnectStep({ onNext, onBack }: ConnectStepProps) {
             type="text" 
             placeholder="e.g. 1042738491..."
             value={phoneId}
-            onChange={(e) => setPhoneId(e.target.value)}
+            onChange={(e) => { setPhoneId(e.target.value); setServerError(""); }}
             onBlur={() => setPhoneIdTouched(true)}
-            className={`w-full px-4 py-3 rounded-xl border bg-neutral focus:outline-none focus:bg-primary-container hover:bg-surface-variant/30 focus:scale-[1.01] focus:shadow-lg transition-all duration-300 text-on-surface ${phoneIdTouched && !phoneId ? 'border-error focus:border-error' : 'border-outline-variant focus:border-primary'}`}
+            className={`w-full px-4 py-3 rounded-xl border bg-neutral focus:outline-none focus:bg-primary-container hover:bg-surface-variant/30 focus:scale-[1.01] focus:shadow-lg transition-all duration-300 text-on-surface ${
+              phoneIdTouched && !phoneIdValid
+                ? "border-error focus:border-error"
+                : phoneIdTouched && phoneIdValid
+                ? "border-outline-variant focus:border-primary"
+                : "border-outline-variant focus:border-primary"
+            }`}
           />
           {phoneIdTouched && !phoneId && (
             <p className="text-error label-medium mt-1">Field must not be empty</p>
+          )}
+          {phoneIdTouched && phoneId && !phoneIdValid && (
+            <p className="text-error label-medium mt-1">Phone Number ID must be a numeric ID (10+ digits)</p>
           )}
         </div>
 
@@ -50,14 +88,29 @@ export default function ConnectStep({ onNext, onBack }: ConnectStepProps) {
             type="text" 
             placeholder="EAAGm0..."
             value={token}
-            onChange={(e) => setToken(e.target.value)}
+            onChange={(e) => { setToken(e.target.value); setServerError(""); }}
             onBlur={() => setTokenTouched(true)}
-            className={`w-full px-4 py-3 rounded-xl border bg-neutral focus:outline-none focus:bg-primary-container hover:bg-surface-variant/30 focus:scale-[1.01] focus:shadow-lg transition-all duration-300 text-on-surface ${tokenTouched && !token ? 'border-error focus:border-error' : 'border-outline-variant focus:border-primary'}`}
+            className={`w-full px-4 py-3 rounded-xl border bg-neutral focus:outline-none focus:bg-primary-container hover:bg-surface-variant/30 focus:scale-[1.01] focus:shadow-lg transition-all duration-300 text-on-surface ${
+              tokenTouched && !tokenValid
+                ? "border-error focus:border-error"
+                : tokenTouched && tokenValid
+                ? "border-outline-variant focus:border-primary"
+                : "border-outline-variant focus:border-primary"
+            }`}
           />
           {tokenTouched && !token && (
             <p className="text-error label-medium mt-1">Field must not be empty</p>
           )}
+          {tokenTouched && token && !tokenValid && (
+            <p className="text-error label-medium mt-1">Token must start with &quot;EAA&quot; and be a valid Meta system token</p>
+          )}
         </div>
+
+        {serverError && (
+          <div className="p-3 rounded-xl border border-error/40 bg-error/10 text-error label-medium">
+            {serverError}
+          </div>
+        )}
       </div>
 
       <div className="flex items-center gap-4">
@@ -82,7 +135,7 @@ export default function ConnectStep({ onNext, onBack }: ConnectStepProps) {
              </svg>
           ) : (
             <>
-              Next
+              Verify &amp; Connect
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-1 transition-transform">
                 <line x1="5" x2="19" y1="12" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>

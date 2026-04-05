@@ -5,13 +5,41 @@ import { useState } from "react";
 
 export default function LoginPage() {
   const [loading, setLoading] = useState(false);
+  const [serverError, setServerError] = useState("");
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const form = e.currentTarget;
+    const email = (form.elements.namedItem("email") as HTMLInputElement).value;
+    const password = (form.elements.namedItem("password") as HTMLInputElement).value;
+
     setLoading(true);
-    // Simulate server action
-    await new Promise(r => setTimeout(r, 1200));
-    window.location.href = "/dashboard";
+    setServerError("");
+    try {
+      // Background API call for data persistence
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      
+      // We still check for basic errors, but ensure a smooth transition
+      const data = await res.json();
+      if (!res.ok) {
+        setServerError(data.error ?? "Something went wrong. Please try again.");
+        setLoading(false);
+        return;
+      }
+
+      // Restore simulated smooth transition
+      setTimeout(() => {
+        window.location.href = "/dashboard";
+      }, 800);
+      
+    } catch {
+      setServerError("Network error. Please check your connection and try again.");
+      setLoading(false);
+    }
   }
 
   return (
@@ -33,7 +61,7 @@ export default function LoginPage() {
           <div className="w-24 h-24 bg-white/10 rounded-full flex items-center justify-center mb-8 mx-auto backdrop-blur-lg border border-white/20">
             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
           </div>
-          <h2 className="text-secondary-container mb-6 headline-large">Secure & Reliable Signals</h2>
+          <h2 className="text-secondary-container mb-6 headline-large">Secure &amp; Reliable Signals</h2>
           <p className="text-secondary-container/80 body-large text-xl">
             Access your dashboard with end-to-end security and full control over your WhatsApp communication.
           </p>
@@ -58,6 +86,7 @@ export default function LoginPage() {
               <label htmlFor="email" className="label-large text-on-surface-variant/70">Work email</label>
               <input 
                 id="email"
+                name="email"
                 type="email" 
                 required 
                 className="w-full px-4 py-3 rounded-xl border border-outline-variant bg-neutral hover:border-outline focus:outline-none focus:border-primary hover:bg-surface-variant/30 focus:scale-[1.01] focus:shadow-lg transition-all duration-1000 text-on-surface"
@@ -71,11 +100,18 @@ export default function LoginPage() {
               </div>
               <input 
                 id="password"
+                name="password"
                 type="password" 
                 required 
                 className="w-full px-4 py-3 rounded-xl border border-outline-variant bg-neutral hover:border-outline focus:outline-none focus:border-primary hover:bg-surface-variant/30 focus:scale-[1.01] focus:shadow-lg transition-all duration-1000 text-on-surface"
               />
             </div>
+
+            {serverError && (
+              <div className="p-3 rounded-xl border border-error/40 bg-error/10 text-error label-medium">
+                {serverError}
+              </div>
+            )}
 
             <button 
               type="submit" 
