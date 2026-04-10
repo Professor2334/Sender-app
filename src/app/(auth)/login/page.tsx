@@ -6,24 +6,107 @@ import { useState } from "react";
 export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [serverError, setServerError] = useState("");
+  const [values, setValues] = useState({ email: "", password: "" });
+  const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
+  const [touched, setTouched] = useState<{ email?: boolean; password?: boolean }>({});
+
+  const passwordRequirements = [
+    { label: "Password must be 8 characters", test: (p: string) => p.length >= 8 },
+    { label: "Password must contain a number", test: (p: string) => /\d/.test(p) },
+    { label: "Password must contain a special character", test: (p: string) => /[!@#$%^&*(),.?":{}|<>]/.test(p) },
+  ];
+
+  function validateEmail(email: string) {
+    if (!email) return "Enter a valid company email address";
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) return "Enter a valid company email address";
+    
+    const domain = email.split("@")[1]?.toLowerCase();
+    if (domain === "gmail.com" || domain === "yahoo.com") {
+      return "This is not a valid company email address";
+    }
+    return "";
+  }
+
+  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = e.target;
+    setValues(prev => ({ ...prev, [name]: value }));
+    setServerError("");
+
+    if (name === "email") {
+      const emailError = validateEmail(value);
+      setErrors(prev => ({ ...prev, email: emailError }));
+    }
+
+    if (name === "password") {
+      setErrors(prev => ({ ...prev, password: "" }));
+    }
+  }
+
+  function handleBlur(e: React.FocusEvent<HTMLInputElement>) {
+    const { name, value } = e.target;
+    setTouched(prev => ({ ...prev, [name]: true }));
+
+    if (name === "email") {
+      if (!value) {
+        setErrors(prev => ({ ...prev, email: "field must not be empty" }));
+      } else {
+        setErrors(prev => ({ ...prev, email: validateEmail(value) }));
+      }
+    }
+    if (name === "password") {
+      if (!value) {
+        setErrors(prev => ({ ...prev, password: "field must not be empty" }));
+      }
+    }
+  }
+
+  const isFieldValid = (name: keyof typeof values) => {
+    if (!values[name] || errors[name]) return false;
+    if (name === "password") {
+      return passwordRequirements.every(req => req.test(values.password));
+    }
+    return true;
+  };
+
+  const getInputClass = (name: keyof typeof values) => {
+    const base = "w-full px-4 py-3 rounded-xl border focus:outline-none focus:border-primary hover:bg-surface-variant/30 focus:scale-[1.01] focus:shadow-lg transition-all duration-300 text-on-surface";
+    const status = errors[name] 
+      ? "border-error bg-neutral" 
+      : isFieldValid(name) 
+        ? "border-outline-variant bg-primary-container"
+        : "border-outline-variant bg-neutral";
+    return `${base} ${status}`;
+  };
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const form = e.currentTarget;
-    const email = (form.elements.namedItem("email") as HTMLInputElement).value;
-    const password = (form.elements.namedItem("password") as HTMLInputElement).value;
+    
+    const emailError = validateEmail(values.email);
+    const passwordValid = passwordRequirements.every(req => req.test(values.password));
+    let passwordError = "";
+    
+    if (!values.password) {
+      passwordError = "field must not be empty";
+    } else if (!passwordValid) {
+      passwordError = "Please meet all password requirements";
+    }
+
+    if (emailError || passwordError) {
+      setErrors({ email: emailError, password: passwordError });
+      setTouched({ email: true, password: true });
+      return;
+    }
 
     setLoading(true);
     setServerError("");
     try {
-      // Background API call for data persistence
       const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email: values.email, password: values.password }),
       });
       
-      // We still check for basic errors, but ensure a smooth transition
       const data = await res.json();
       if (!res.ok) {
         setServerError(data.error ?? "Something went wrong. Please try again.");
@@ -31,7 +114,6 @@ export default function LoginPage() {
         return;
       }
 
-      // Restore simulated smooth transition
       setTimeout(() => {
         window.location.href = "/dashboard";
       }, 800);
@@ -81,30 +163,61 @@ export default function LoginPage() {
           
           <h1 className="title-18 mb-[15px] text-on-surface" style={{letterSpacing: "-0.05em"}}>Sign In</h1>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6" noValidate>
             <div className="space-y-2">
-              <label htmlFor="email" className="label-large text-on-surface-variant/70">Work email</label>
+              <label htmlFor="email" className="label-large text-on-surface-variant/70">Work email *</label>
               <input 
                 id="email"
                 name="email"
                 type="email" 
-                required 
-                className="w-full px-4 py-3 rounded-xl border border-outline-variant bg-neutral hover:border-outline focus:outline-none focus:border-primary hover:bg-surface-variant/30 focus:scale-[1.01] focus:shadow-lg transition-all duration-1000 text-on-surface"
+                value={values.email}
+                onChange={handleInputChange}
+                onBlur={handleBlur}
+                className={getInputClass("email")}
               />
+              {errors.email && <p className="text-error label-medium mt-1">{errors.email}</p>}
             </div>
 
             <div className="space-y-1">
               <div className="flex justify-between items-center">
-                <label htmlFor="password" className="label-large text-on-surface-variant/70">Password</label>
+                <label htmlFor="password" className="label-large text-on-surface-variant/70">Password *</label>
                 <Link href="/forgot-password" className="label-medium text-primary hover:underline">Forgot password?</Link>
               </div>
               <input 
                 id="password"
                 name="password"
                 type="password" 
-                required 
-                className="w-full px-4 py-3 rounded-xl border border-outline-variant bg-neutral hover:border-outline focus:outline-none focus:border-primary hover:bg-surface-variant/30 focus:scale-[1.01] focus:shadow-lg transition-all duration-1000 text-on-surface"
+                value={values.password}
+                onChange={handleInputChange}
+                onBlur={handleBlur}
+                className={getInputClass("password")}
               />
+
+              {/* Password Requirements Checklist */}
+              {values.password && (
+                <div className="mt-3 space-y-2 animate-in fade-in slide-in-from-top-1 duration-300">
+                  {passwordRequirements.map((req, i) => {
+                    const met = req.test(values.password);
+                    return (
+                      <div key={i} className={`flex items-center gap-2 transition-colors duration-300 ${met ? "text-success" : "text-error"}`}>
+                        <div className={`w-4 h-4 rounded-full flex items-center justify-center transition-colors ${met ? "bg-success" : "bg-error"}`}>
+                          {met ? (
+                            <svg className="w-3 h-3 text-on-success" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+                              <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                          ) : (
+                            <div className="w-1.5 h-1.5 rounded-full bg-on-error" />
+                          )}
+                        </div>
+                        <span className="label-medium font-medium">
+                          {req.label}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+              {errors.password && !values.password && <p className="text-error label-medium mt-1">{errors.password}</p>}
             </div>
 
             {serverError && (

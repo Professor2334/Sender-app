@@ -71,7 +71,7 @@ export default function CsvMappingModal({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-300">
       <div className="absolute inset-0 bg-scrim/40 backdrop-blur-sm" onClick={onClose}></div>
       
-      <div className="relative bg-surface border border-outline-variant rounded-[2rem] shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col animate-in zoom-in-95 duration-300 overflow-hidden">
+      <div className="relative bg-surface border border-outline-variant rounded-[2rem] w-full max-w-4xl max-h-[90vh] flex flex-col animate-in zoom-in-95 duration-300 overflow-hidden">
         
         {/* Header */}
         <div className="flex items-center justify-between p-6 sm:p-8 border-b border-outline-variant bg-surface-container-lowest">
@@ -98,7 +98,7 @@ export default function CsvMappingModal({
              )}
           </div>
 
-          <div className="border border-outline-variant rounded-2xl overflow-hidden shadow-sm">
+          <div className="border border-outline-variant rounded-2xl overflow-hidden">
             <table className="w-full text-left border-collapse">
               <thead className="bg-surface-variant/50">
                 <tr>

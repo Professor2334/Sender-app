@@ -1,6 +1,6 @@
 import EmptyState from "@/components/dashboard/EmptyState";
 
-export default function CampaignsPage() {
+export default function CampaignsView() {
   const campaigns: any[] = [];
 
   const getStatusColor = (status: string) => {
@@ -75,7 +75,7 @@ export default function CampaignsPage() {
             title="No campaigns yet"
             description="Create your first campaign to start sending automated outreach signals to your leads."
             actionText="Launch Campaign"
-            actionHref="/dashboard/campaigns"
+            actionHref="/dashboard?view=campaigns"
           />
         </div>
       )}

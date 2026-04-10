@@ -1,15 +1,20 @@
 "use client";
 
+import { useState } from "react";
+
 interface ImportStepProps {
   onNext: () => void;
   onBack?: () => void;
 }
 
 export default function ImportStep({ onNext, onBack }: ImportStepProps) {
+  const [hasFile, setHasFile] = useState(false);
+
   function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    // Logic for actual upload could go here
     if (e.target.files && e.target.files[0]) {
-      // Optional: auto-advance or just let user click Next
+      setHasFile(true);
+    } else {
+      setHasFile(false);
     }
   }
 
@@ -52,7 +57,7 @@ export default function ImportStep({ onNext, onBack }: ImportStepProps) {
             onClick={onNext}
             className="flex-1 py-5 bg-primary text-on-primary rounded-2xl label-large text-xl hover:bg-tertiary hover:text-on-tertiary transition-colors flex items-center justify-center gap-3 group cursor-pointer"
           >
-            Next
+            {hasFile ? "Next" : "Skip"}
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-1 transition-transform">
               <line x1="5" x2="19" y1="12" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>

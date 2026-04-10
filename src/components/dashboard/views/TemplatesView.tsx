@@ -1,6 +1,6 @@
 import EmptyState from "@/components/dashboard/EmptyState";
 
-export default function TemplatesPage() {
+export default function TemplatesView() {
   const templates: any[] = [];
 
   return (
@@ -37,21 +37,13 @@ export default function TemplatesPage() {
             
             <div className="flex items-center justify-between pt-6 border-t border-outline-variant">
               <span className="label-small text-on-surface-variant">Last updated {template.date}</span>
-              <button className="p-2 rounded-lg bg-primary-container text-primary hover:bg-primary hover:text-on-primary transition-all">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-              </button>
             </div>
           </div>
         ))}
 
-        {/* Create Card */}
         <button className="p-8 rounded-[2rem] border-2 border-dashed border-outline-variant hover:border-primary/50 hover:bg-primary/5 transition-all group flex flex-col items-center justify-center gap-4 h-full min-h-[300px]">
-          <div className="w-16 h-16 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant group-hover:scale-110 group-hover:bg-primary/10 group-hover:text-primary transition-all">
-             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-          </div>
           <div className="text-center">
             <p className="label-large text-lg">Create New Template</p>
-            <p className="label-medium text-on-surface-variant">Draft your next signal</p>
           </div>
         </button>
         </div>
@@ -62,7 +54,7 @@ export default function TemplatesPage() {
             title="No templates yet"
             description="Create reusable message templates to speed up your outreach workflow."
             actionText="Create Template"
-            actionHref="/dashboard/templates"
+            actionHref="/dashboard?view=templates"
           />
         </div>
       )}

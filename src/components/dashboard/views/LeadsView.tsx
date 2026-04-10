@@ -5,7 +5,7 @@ import EmptyState from "@/components/dashboard/EmptyState";
 import CsvMappingModal from "@/components/dashboard/CsvMappingModal";
 import Papa from "papaparse";
 
-export default function LeadsPage() {
+export default function LeadsView() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [leads, setLeads] = useState<any[]>([]);
@@ -23,7 +23,6 @@ export default function LeadsPage() {
     const file = e.target.files?.[0];
     if (file) {
       setCsvFile(file);
-      // Parse first few rows for the mapping preview
       Papa.parse(file, {
         header: false,
         preview: 4,
@@ -34,14 +33,12 @@ export default function LeadsPage() {
             setRawHeaders(data[0]);
             setSampleData(data.slice(1));
             
-            // Re-parse completely with headers for data mapping later
             Papa.parse(file, {
               header: true,
               skipEmptyLines: true,
               complete: (fullResults) => {
                 setRawCsvData(fullResults.data);
                 setIsMappingModalOpen(true);
-                // Reset input in case they select same file again
                 if (fileInputRef.current) fileInputRef.current.value = "";
               }
             });
@@ -52,7 +49,6 @@ export default function LeadsPage() {
   };
 
   const handleConfirmMapping = (mappings: Record<string, string>) => {
-    // Reverse mapping so key = SystemField, value = CSV Header
     const reverseMappings: Record<string, string> = {};
     Object.keys(mappings).forEach(csvHeader => {
       const sysField = mappings[csvHeader];
@@ -67,14 +63,12 @@ export default function LeadsPage() {
     
     rawCsvData.forEach((row, index) => {
       let phone = row[phoneHeader]?.trim();
-      if (!phone) return; // skip rows missing phone number
+      if (!phone) return;
       
-      // Normalize to E.164 (roughly) by keeping only digits and plus
       phone = phone.replace(/[^0-9+]/g, '');
       if (!phone.startsWith('+')) phone = '+' + phone;
-      if (phone.length < 7) return; // Skip highly invalid numbers
+      if (phone.length < 7) return;
       
-      // Duplicate prevention rule
       if (existingPhones.has(phone)) return;
       existingPhones.add(phone);
       
@@ -142,7 +136,6 @@ export default function LeadsPage() {
 
       {leads.length > 0 ? (
         <>
-          {/* Filters & Search */}
           <div className="flex flex-col md:flex-row gap-4 p-4 rounded-2xl bg-surface border border-outline-variant">
             <div className="relative flex-1">
               <svg className="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
@@ -154,22 +147,13 @@ export default function LeadsPage() {
             </div>
             <select className="px-4 py-2 rounded-xl border border-outline-variant bg-surface-container-low label-medium outline-none focus:border-primary transition-all min-w-[150px]">
               <option>All Status</option>
-              <option>New</option>
-              <option>Contacted</option>
-              <option>Replied</option>
-              <option>Interested</option>
-              <option>Converted</option>
             </select>
             <select className="px-4 py-2 rounded-xl border border-outline-variant bg-surface-container-low label-medium outline-none focus:border-primary transition-all min-w-[150px]">
               <option>All Sources</option>
-              <option>Twitter Ad</option>
-              <option>Meta Ad</option>
-              <option>Direct</option>
             </select>
           </div>
 
-      {/* Table Section */}
-      <div className="bg-surface border border-outline-variant rounded-3xl overflow-hidden shadow-sm">
+      <div className="bg-surface border border-outline-variant rounded-3xl overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse min-w-[800px]">
             <thead>
@@ -210,20 +194,8 @@ export default function LeadsPage() {
           </table>
         </div>
         
-        {/* Pagination */}
         <div className="p-6 border-t border-outline-variant flex justify-between items-center bg-surface-container-low">
-          <span className="label-medium text-on-surface-variant">Showing 1 to 7 of 124 leads</span>
-          <div className="flex gap-2">
-            <button className="p-2 rounded-lg border border-outline-variant hover:bg-surface-variant disabled:opacity-30 transition-all" disabled>
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-            </button>
-            <button className="px-3 py-2 rounded-lg bg-primary text-on-primary label-medium shadow-md">1</button>
-            <button className="px-3 py-2 rounded-lg border border-outline-variant hover:bg-surface-variant label-medium transition-all">2</button>
-            <button className="px-3 py-2 rounded-lg border border-outline-variant hover:bg-surface-variant label-medium transition-all">3</button>
-            <button className="p-2 rounded-lg border border-outline-variant hover:bg-surface-variant transition-all">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-            </button>
-          </div>
+          <span className="label-medium text-on-surface-variant">Showing results</span>
           </div>
         </div>
         </>

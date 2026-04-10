@@ -24,7 +24,7 @@ export default function EmptyState({
 }: EmptyStateProps) {
   return (
     <div className="flex flex-col items-center justify-center py-20 px-6 text-center animate-in fade-in zoom-in duration-500">
-      <div className="w-20 h-20 bg-surface-container-low rounded-[2rem] flex items-center justify-center text-on-surface-variant mb-6 border border-outline-variant shadow-sm transition-transform hover:scale-110">
+      <div className="w-20 h-20 bg-surface-container-low rounded-[2rem] flex items-center justify-center text-on-surface-variant mb-6 border border-outline-variant transition-transform hover:scale-110">
         {icon}
       </div>
       <h3 className="headline-large text-2xl font-bold text-on-surface mb-2">{title}</h3>

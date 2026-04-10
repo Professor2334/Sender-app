@@ -59,3 +59,6 @@ on the create account form when a user enter a valid field,change the background
 - remove the top line  border of the onboarding page
 - in the step 1 of 4 in the onboarding process recreate the blue indicator bar positioned above step 1 of 4,make the indicator modern,and stay on on 4 onboarding phase as the steps changes 
  and i want the onboading to be SPA ,dont change pages ,do the four onboarding on one page while pressing next to the next step
+
+Dashboard 
+Tweak the dashboard architecture 

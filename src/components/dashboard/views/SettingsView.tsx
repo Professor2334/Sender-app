@@ -1,4 +1,4 @@
-export default function SettingsPage() {
+export default function SettingsView() {
   return (
     <div className="space-y-8 animate-in fade-in duration-500 max-w-4xl mx-auto">
       <div>
@@ -6,7 +6,6 @@ export default function SettingsPage() {
         <p className="body-large text-on-surface-variant">Manage your account, API connections, and workspace preferences.</p>
       </div>
 
-      {/* Tabs Placeholder */}
       <div className="flex gap-8 border-b border-outline-variant">
         <button className="px-4 py-4 border-b-2 border-primary text-primary label-large">Profile</button>
         <button className="px-4 py-4 border-b-2 border-transparent text-on-surface-variant hover:text-primary transition-all label-large">WhatsApp API</button>
@@ -15,7 +14,6 @@ export default function SettingsPage() {
       </div>
 
       <div className="space-y-12">
-        {/* Profile Section */}
         <section className="space-y-6">
           <h3 className="title-medium text-xl">Account Information</h3>
           <div className="grid md:grid-cols-2 gap-6">
@@ -42,7 +40,6 @@ export default function SettingsPage() {
           </div>
         </section>
 
-        {/* API Connection Card */}
         <section className="p-8 rounded-[2rem] bg-primary/5 border border-primary/20 flex flex-col md:flex-row items-center justify-between gap-8">
            <div className="flex gap-6 items-center">
               <div className="w-16 h-16 bg-primary-container rounded-3xl flex items-center justify-center text-primary">

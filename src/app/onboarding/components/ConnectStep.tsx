@@ -14,6 +14,7 @@ export default function ConnectStep({ onNext, onBack }: ConnectStepProps) {
   const [token, setToken] = useState("");
   const [tokenTouched, setTokenTouched] = useState(false);
   const [serverError, setServerError] = useState("");
+  const [isInteracting, setIsInteracting] = useState(false);
 
   // Relaxed validation: Just check if not empty for development bypass
   const phoneIdValid = phoneId.trim().length > 0;
@@ -66,6 +67,7 @@ export default function ConnectStep({ onNext, onBack }: ConnectStepProps) {
             value={phoneId}
             onChange={(e) => { setPhoneId(e.target.value); setServerError(""); }}
             onBlur={() => setPhoneIdTouched(true)}
+            onFocus={() => setIsInteracting(true)}
             className={`w-full px-4 py-3 rounded-xl border bg-neutral focus:outline-none focus:bg-primary-container hover:bg-surface-variant/30 focus:scale-[1.01] focus:shadow-lg transition-all duration-300 text-on-surface ${
               phoneIdTouched && !phoneIdValid
                 ? "border-error focus:border-error"
@@ -90,6 +92,7 @@ export default function ConnectStep({ onNext, onBack }: ConnectStepProps) {
             value={token}
             onChange={(e) => { setToken(e.target.value); setServerError(""); }}
             onBlur={() => setTokenTouched(true)}
+            onFocus={() => setIsInteracting(true)}
             className={`w-full px-4 py-3 rounded-xl border bg-neutral focus:outline-none focus:bg-primary-container hover:bg-surface-variant/30 focus:scale-[1.01] focus:shadow-lg transition-all duration-300 text-on-surface ${
               tokenTouched && !tokenValid
                 ? "border-error focus:border-error"
@@ -124,7 +127,13 @@ export default function ConnectStep({ onNext, onBack }: ConnectStepProps) {
           </button>
         )}
         <button 
-          onClick={handleNext}
+          onClick={() => {
+            if (isInteracting || phoneId || token) {
+              handleNext();
+            } else {
+              onNext();
+            }
+          }}
           disabled={loading}
           className="flex-1 py-5 bg-primary text-on-primary rounded-2xl label-large text-xl hover:bg-tertiary hover:text-on-tertiary transition-colors flex items-center justify-center gap-3 group disabled:opacity-70 cursor-pointer"
         >
@@ -135,7 +144,7 @@ export default function ConnectStep({ onNext, onBack }: ConnectStepProps) {
              </svg>
           ) : (
             <>
-              Verify &amp; Connect
+              {isInteracting || phoneId || token ? "Next" : "Skip"}
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-1 transition-transform">
                 <line x1="5" x2="19" y1="12" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
