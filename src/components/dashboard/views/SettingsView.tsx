@@ -19,19 +19,19 @@ export default function SettingsView() {
           <div className="grid md:grid-cols-2 gap-6">
              <div className="space-y-2">
                 <label className="label-large text-on-surface-variant">Display Name</label>
-                <input type="text" defaultValue="Admin User" className="w-full px-4 py-3 rounded-xl border border-outline bg-surface-container-low focus:border-primary outline-none transition-all" />
+                <input type="text" defaultValue="Admin User" className="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-low focus:border-primary outline-none transition-all" />
              </div>
              <div className="space-y-2">
                 <label className="label-large text-on-surface-variant">Email Address</label>
-                <input type="email" defaultValue="admin@acme.inc" className="w-full px-4 py-3 rounded-xl border border-outline bg-surface-container-low focus:border-primary outline-none transition-all" />
+                <input type="email" defaultValue="admin@acme.inc" className="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-low focus:border-primary outline-none transition-all" />
              </div>
              <div className="space-y-2">
                 <label className="label-large text-on-surface-variant">Company Name</label>
-                <input type="text" defaultValue="Acme Inc." className="w-full px-4 py-3 rounded-xl border border-outline bg-surface-container-low focus:border-primary outline-none transition-all" />
+                <input type="text" defaultValue="Acme Inc." className="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-low focus:border-primary outline-none transition-all" />
              </div>
              <div className="space-y-2">
                 <label className="label-large text-on-surface-variant">Timezone</label>
-                <select className="w-full px-4 py-3 rounded-xl border border-outline bg-surface-container-low focus:border-primary outline-none transition-all appearance-none cursor-pointer">
+                <select className="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-low focus:border-primary outline-none transition-all appearance-none cursor-pointer">
                    <option>UTC (London)</option>
                    <option>EST (New York)</option>
                    <option>PST (Los Angeles)</option>
@@ -54,12 +54,12 @@ export default function SettingsView() {
                  </div>
               </div>
            </div>
-           <button className="px-6 py-3 border border-outline rounded-xl label-large hover:bg-surface-variant transition-all">Configure API</button>
+           <button className="px-6 py-3 border border-outline-variant rounded-xl label-large hover:bg-surface-variant transition-all">Configure API</button>
         </section>
 
         <div className="flex justify-end gap-4 pt-8 border-t border-outline-variant">
-           <button className="px-8 py-3 rounded-xl border border-outline label-large hover:bg-surface-variant transition-all">Discard Changes</button>
-           <button className="px-8 py-3 rounded-xl bg-primary text-on-primary label-large shadow-lg hover:shadow-primary/20 transition-all">Save Preferences</button>
+           <button className="px-8 py-3 rounded-xl border border-outline-variant label-large hover:bg-surface-variant transition-all">Discard Changes</button>
+           <button className="px-8 py-3 rounded-xl bg-primary text-on-primary label-large hover:bg-primary/90 transition-all">Save Preferences</button>
         </div>
       </div>
     </div>

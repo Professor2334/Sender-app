@@ -39,7 +39,7 @@ export default function DashboardHeader() {
               <input 
                 type="text" 
                 placeholder="Search leads, campaigns..." 
-                className="w-full pl-10 pr-4 py-2.5 rounded-full border border-outline bg-surface-container-low focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all label-medium"
+                className="w-full pl-10 pr-4 py-4 rounded-full border border-outline-variant bg-surface-container-low focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all label-medium"
               />
            </div>
         </div>
@@ -57,7 +57,7 @@ export default function DashboardHeader() {
             </div>
             <button 
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold cursor-pointer hover:shadow-md hover:ring-2 hover:ring-primary/30 transition-all focus:outline-none relative z-50"
+              className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold cursor-pointer hover:ring-2 hover:ring-primary/30 transition-all focus:outline-none relative z-50"
               title="Profile Settings"
             >
               A
@@ -112,10 +112,10 @@ export default function DashboardHeader() {
                 >
                   Cancel
                 </button>
-                <button 
+                 <button 
                   onClick={confirmLogout}
                   disabled={isLoggingOut}
-                  className="px-4 py-2 rounded-xl bg-error text-on-error label-large hover:shadow-lg hover:shadow-error/20 transition-all flex items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="px-4 py-2 rounded-xl bg-error text-on-error label-large hover:bg-error/90 transition-all flex items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                   {isLoggingOut ? (
                      <>

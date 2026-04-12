@@ -120,13 +120,13 @@ export default function LeadsView() {
           <p className="body-large text-on-surface-variant">View, organize, and segment your contacts for outreach.</p>
         </div>
         <div className="flex gap-4">
-          <button className="px-6 py-3 border border-outline rounded-xl label-large hover:bg-surface-variant transition-all flex items-center gap-2">
+          <button className="px-6 py-3 border border-outline-variant rounded-xl label-large hover:bg-surface-variant transition-all flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
             Export
           </button>
           <button 
             onClick={handleImportClick}
-            className="px-6 py-3 bg-primary text-on-primary rounded-xl label-large hover:shadow-lg hover:shadow-primary/20 transition-all flex items-center gap-2 cursor-pointer"
+            className="px-6 py-3 bg-primary text-on-primary rounded-xl label-large hover:bg-primary/90 transition-all flex items-center gap-2 cursor-pointer"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
             Import Leads

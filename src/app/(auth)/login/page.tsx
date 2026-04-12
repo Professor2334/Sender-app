@@ -10,12 +10,6 @@ export default function LoginPage() {
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
   const [touched, setTouched] = useState<{ email?: boolean; password?: boolean }>({});
 
-  const passwordRequirements = [
-    { label: "Password must be 8 characters", test: (p: string) => p.length >= 8 },
-    { label: "Password must contain a number", test: (p: string) => /\d/.test(p) },
-    { label: "Password must contain a special character", test: (p: string) => /[!@#$%^&*(),.?":{}|<>]/.test(p) },
-  ];
-
   function validateEmail(email: string) {
     if (!email) return "Enter a valid company email address";
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -63,9 +57,6 @@ export default function LoginPage() {
 
   const isFieldValid = (name: keyof typeof values) => {
     if (!values[name] || errors[name]) return false;
-    if (name === "password") {
-      return passwordRequirements.every(req => req.test(values.password));
-    }
     return true;
   };
 
@@ -83,13 +74,10 @@ export default function LoginPage() {
     e.preventDefault();
     
     const emailError = validateEmail(values.email);
-    const passwordValid = passwordRequirements.every(req => req.test(values.password));
     let passwordError = "";
     
     if (!values.password) {
       passwordError = "field must not be empty";
-    } else if (!passwordValid) {
-      passwordError = "Please meet all password requirements";
     }
 
     if (emailError || passwordError) {
@@ -193,30 +181,7 @@ export default function LoginPage() {
                 className={getInputClass("password")}
               />
 
-              {/* Password Requirements Checklist */}
-              {values.password && (
-                <div className="mt-3 space-y-2 animate-in fade-in slide-in-from-top-1 duration-300">
-                  {passwordRequirements.map((req, i) => {
-                    const met = req.test(values.password);
-                    return (
-                      <div key={i} className={`flex items-center gap-2 transition-colors duration-300 ${met ? "text-success" : "text-error"}`}>
-                        <div className={`w-4 h-4 rounded-full flex items-center justify-center transition-colors ${met ? "bg-success" : "bg-error"}`}>
-                          {met ? (
-                            <svg className="w-3 h-3 text-on-success" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
-                              <polyline points="20 6 9 17 4 12" />
-                            </svg>
-                          ) : (
-                            <div className="w-1.5 h-1.5 rounded-full bg-on-error" />
-                          )}
-                        </div>
-                        <span className="label-medium font-medium">
-                          {req.label}
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
+
               {errors.password && !values.password && <p className="text-error label-medium mt-1">{errors.password}</p>}
             </div>
 

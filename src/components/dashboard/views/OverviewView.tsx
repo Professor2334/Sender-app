@@ -14,7 +14,7 @@ export default function OverviewView() {
         </div>
         <Link 
           href="/dashboard?view=campaigns"
-          className="px-6 py-3 bg-primary text-on-primary rounded-xl label-large hover:shadow-lg hover:shadow-primary/20 transition-all flex items-center gap-2 group"
+          className="px-6 py-3 bg-primary text-on-primary rounded-xl label-large hover:bg-primary/90 transition-all flex items-center gap-2 group"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-0.5 transition-transform"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
           New Campaign

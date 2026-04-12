@@ -12,7 +12,7 @@ export default function AnalyticsView() {
         <>
       <div className="flex gap-4 p-4 rounded-2xl bg-surface border border-outline-variant items-center justify-between">
          <div className="flex gap-4">
-            <button className="px-4 py-2 rounded-xl bg-primary text-on-primary label-medium shadow-md">Last 7 Days</button>
+            <button className="px-4 py-2 rounded-xl bg-primary text-on-primary label-medium">Last 7 Days</button>
             <button className="px-4 py-2 rounded-xl border border-outline-variant hover:bg-surface-variant transition-all label-medium">Last 30 Days</button>
             <button className="px-4 py-2 rounded-xl border border-outline-variant hover:bg-surface-variant transition-all label-medium">Last 90 Days</button>
          </div>

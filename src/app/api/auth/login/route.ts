@@ -31,18 +31,16 @@ export async function POST(req: NextRequest) {
         );
       }
     } else {
-      // Fallback Mock Logic to show "Invalid password" notification if no cookie
-      if (password === "wrongpassword" || password === "invalid") {
-        return NextResponse.json(
-          { error: "Invalid Password" },
-          { status: 401 }
-        );
-      }
+      // If the cookies got cleared, they truly have no account in our mock DB.
+      return NextResponse.json(
+        { error: "Account not found for this email. Please sign up." },
+        { status: 404 }
+      );
     }
 
-    // --- Mocked Success: Always allow login for development ---
-    // (This resolves any potential DB connection or hashing errors causing Network Error)
-    return NextResponse.json({ success: true, message: "Mocked login successful" }, { status: 200 });
+    const response = NextResponse.json({ success: true, message: "Mocked login successful" }, { status: 200 });
+    response.cookies.set("mock_is_logged_in", "true", { path: "/" });
+    return response;
   } catch (err) {
     console.error("[LOGIN ERROR]", err);
     return NextResponse.json(
